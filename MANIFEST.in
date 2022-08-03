@@ -1,0 +1,3 @@
+include light_side/.config.yaml
+include requirements.txt
+recursive-include light_side/models *

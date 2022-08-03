@@ -1,0 +1,13 @@
+PACKAGE:
+  NAME: light_side
+  ARCH: archs
+  MODEL: models
+
+MODEL:
+  zerodce:
+    default:
+      zerodce:
+        v0:
+          url: "https://github.com/canturan10/satellighte/releases/download/v0.0.2/mobilenetv2_default_eurosat.pth"
+        v1:
+          url: "https://github.com/canturan10/satellighte/releases/download/v0.0.2/mobilenetv2_default_eurosat.pth"
