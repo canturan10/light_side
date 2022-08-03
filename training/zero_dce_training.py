@@ -189,12 +189,12 @@ def main(args):
     )
 
     # Load datasets from the ls.dataset module
-    train_ds = ls.datasets.Zero_DCE(
+    train_ds = ls.datasets.ZeroDCE(
         root_dir=args.data_dir,
         phase="train",
         transforms=train_tt,
     )
-    val_ds = ls.datasets.Zero_DCE(
+    val_ds = ls.datasets.ZeroDCE(
         root_dir=args.data_dir,
         phase="val",
         transforms=val_tt,

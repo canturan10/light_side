@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List, Tuple
+from typing import Tuple
 
 import numpy as np
 import torch
@@ -10,7 +10,10 @@ from ..core import _download_file_from_url
 from .base import BaseDataset, Identity
 
 
-class Zero_DCE(BaseDataset):
+class ZeroDCE(BaseDataset):
+    """
+    ZeroDCE is a dataset mentioned in the paper and in the original implementation.
+    """
 
     __phases__ = (
         "train",
@@ -94,18 +97,18 @@ class Zero_DCE(BaseDataset):
 
         os.makedirs(self.root_dir, exist_ok=True)
         _download_file_from_url(
-            "https://drive.google.com/u/0/uc?id=1PCesRqeXYINcsulnTixVjR15xFNXropZ&export=download&confirm=t",
-            os.path.join(self.root_dir, "zero_dce.zip"),
+            "https://drive.google.com/u/0/uc?id=1IXluAUo_3yFodOfr1clwxobQhfu6ApCJ&export=download&confirm=t",
+            os.path.join(self.root_dir, "zerodce.zip"),
         )
         extract_archive(
-            os.path.join(self.root_dir, "zero_dce.zip"),
+            os.path.join(self.root_dir, "zerodce.zip"),
             self.root_dir,
             remove_finished=True,
         )
 
 
 if __name__ == "__main__":
-    data = Zero_DCE("light_side/datas/zero_dce")
+    data = ZeroDCE("light_side/datas/zerodce")
     print(data[0])
     print(data.classes)
     print(len(data.classes))
