@@ -7,6 +7,11 @@ from .blocks.loss import *
 
 
 class ZeroDCE(nn.Module):
+    """
+    Implementation of ZeroDCE: Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement
+    The network is the one described in arxiv.org/abs/2001.06826v2 .
+    """
+
     # pylint: disable=no-member
 
     __CONFIGS__ = {
@@ -29,14 +34,13 @@ class ZeroDCE(nn.Module):
 
         self.relu = nn.ReLU(inplace=True)
 
-        number_f = 32
-        self.e_conv1 = nn.Conv2d(3, number_f, 3, 1, 1, bias=True)
-        self.e_conv2 = nn.Conv2d(number_f, number_f, 3, 1, 1, bias=True)
-        self.e_conv3 = nn.Conv2d(number_f, number_f, 3, 1, 1, bias=True)
-        self.e_conv4 = nn.Conv2d(number_f, number_f, 3, 1, 1, bias=True)
-        self.e_conv5 = nn.Conv2d(number_f * 2, number_f, 3, 1, 1, bias=True)
-        self.e_conv6 = nn.Conv2d(number_f * 2, number_f, 3, 1, 1, bias=True)
-        self.e_conv7 = nn.Conv2d(number_f * 2, 24, 3, 1, 1, bias=True)
+        self.conv1 = nn.Conv2d(3, 32, 3, 1, 1, bias=True)
+        self.conv2 = nn.Conv2d(32, 32, 3, 1, 1, bias=True)
+        self.conv3 = nn.Conv2d(32, 32, 3, 1, 1, bias=True)
+        self.conv4 = nn.Conv2d(32, 32, 3, 1, 1, bias=True)
+        self.conv5 = nn.Conv2d(32 * 2, 32, 3, 1, 1, bias=True)
+        self.conv6 = nn.Conv2d(32 * 2, 32, 3, 1, 1, bias=True)
+        self.conv7 = nn.Conv2d(32 * 2, 24, 3, 1, 1, bias=True)
         self.maxpool = nn.MaxPool2d(2, stride=2, return_indices=False, ceil_mode=False)
         self.upsample = nn.UpsamplingBilinear2d(scale_factor=2)
 
@@ -46,13 +50,14 @@ class ZeroDCE(nn.Module):
         self.illumination_smoothing_loss = IlluminationSmoothnessLoss()
 
     def forward(self, x):
-        x1 = self.relu(self.e_conv1(x))
-        x2 = self.relu(self.e_conv2(x1))
-        x3 = self.relu(self.e_conv3(x2))
-        x4 = self.relu(self.e_conv4(x3))
-        x5 = self.relu(self.e_conv5(torch.cat([x3, x4], 1)))
-        x6 = self.relu(self.e_conv6(torch.cat([x2, x5], 1)))
-        x_r = F.tanh(self.e_conv7(torch.cat([x1, x6], 1)))
+        x1 = self.relu(self.conv1(x))
+        x2 = self.relu(self.conv2(x1))
+        x3 = self.relu(self.conv3(x2))
+        x4 = self.relu(self.conv4(x3))
+        x5 = self.relu(self.conv5(torch.cat([x3, x4], 1)))
+        x6 = self.relu(self.conv6(torch.cat([x2, x5], 1)))
+
+        x_r = F.tanh(self.conv7(torch.cat([x1, x6], 1)))
         r1, r2, r3, r4, r5, r6, r7, r8 = torch.split(x_r, 3, dim=1)
         x = x + r1 * (torch.pow(x, 2) - x)
         x = x + r2 * (torch.pow(x, 2) - x)
@@ -69,7 +74,7 @@ class ZeroDCE(nn.Module):
         """
         Convert logits to predictions.
         """
-        enhance_image_1, enhance_image, r = logits
+        enhance_image_1, _, _ = logits
         return enhance_image_1
 
     @classmethod

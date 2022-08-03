@@ -7,11 +7,13 @@ import torch
 
 from . import api
 from .core import _get_arch_cls, _get_model_dir, _parse_saved_model_name
-from .utils import configure_batch, convert_json
+from .utils import configure_batch, convert_np
 import torchmetrics as tm
 
 
 class Enhancer(pl.LightningModule):
+    """Generic pl.LightningModule definition for low light image enhancement"""
+
     # pylint: disable=no-member
     # pylint: disable=not-callable
 
@@ -92,7 +94,7 @@ class Enhancer(pl.LightningModule):
         # Get predictions from the model
         preds = self.forward(batch)
 
-        return preds
+        return convert_np(preds)
 
     @classmethod
     def build(

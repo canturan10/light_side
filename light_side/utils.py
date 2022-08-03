@@ -64,70 +64,49 @@ def configure_batch(
     return batch
 
 
-def convert_json(
+def convert_np(
     preds: List[torch.Tensor],
-    label: List[str],
 ) -> List[Dict]:
     """
-    Convert the predictions to a json format
+    Convert the predictions to a numpy format
 
     Args:
         preds (List[torch.Tensor]): List of torch.Tensor
-        label (List[str]): List of labels
 
     Returns:
-        List[Dict]: List of dictionaries with the label as key and the score as value
+        List[Dict]: List of np arrays
     """
     outputs = []
-    for scores in preds.cpu().numpy().tolist():
-        output = {
-            label: round(score, 2)
-            for score, label in zip(
-                scores,
-                label,
-            )
-        }
+    for pred in preds:
         outputs.append(
-            dict(sorted(output.items(), key=lambda item: item[1], reverse=True))
+            pred.mul(255)
+            .add_(0.5)
+            .clamp_(0, 255)
+            .permute(1, 2, 0)
+            .to("cpu", torch.uint8)
+            .numpy()
         )
 
     return outputs
 
 
-def visualize(img: np.ndarray, preds: List[Dict]) -> Image:
+def visualize(img: np.ndarray, enhanced: np.ndarray) -> Image:
     """
     Virtualize the image with the predictions
 
     Args:
         img (np.ndarray): 3 channel np.ndarray
-        preds (List[Dict]): Predictions. Each prediction is a dictionary with the label as key and the score as value
+        enhanced (np.ndarray): 3 channel enhanced np.ndarray
 
     Returns:
         Image: 3 channel PIL Image that will be shown on screen
     """
-    pil_img = Image.fromarray(img)
+    orj_img = Image.fromarray(img)
+    enh_img = Image.fromarray(enhanced)
 
-    old_size = pil_img.size
-    desired_size = 512
-    ratio = float(desired_size) / max(old_size)
-    new_size = tuple([int(x * ratio) for x in old_size])
-
-    pil_img = pil_img.resize(new_size, Image.ANTIALIAS)
-
-    font = ImageFont.load_default()
-
-    for pred in preds:
-        max_key = max(pred, key=pred.get)
-        model_info = f" {max_key} : {pred[max_key]}"
-
-    text_width, text_height = font.getsize(model_info)
-    margin = np.ceil(0.05 * text_height)
-
-    ImageDraw.Draw(pil_img).text(
-        (margin, text_height - margin),
-        model_info,
-        fill="white",
-        font=font,
+    new_img = Image.new(
+        "RGB", (orj_img.width + enh_img.width, min(orj_img.height, enh_img.height))
     )
-
-    return pil_img
+    new_img.paste(orj_img, (0, 0))
+    new_img.paste(enh_img, (orj_img.width, 0))
+    return new_img
