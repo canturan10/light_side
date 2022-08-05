@@ -129,14 +129,20 @@ results = model.predict(img)
 <!-- ARCHITECTURES -->
 ## Architectures
 
-- [ ] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
+- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
+- [ ] [EnlightenGAN](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
+- [ ] [MBLLEN](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
+- [ ] [LLFlow](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
 
 _For more information, please refer to the [Architectures](https://github.com/canturan10/light_side/blob/master/light_side/archs)_
 
 <!-- DATASETS -->
 ## Datasets
 
-- [ ] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
+- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
+- [ ] [LOL](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
+- [ ] [DICM](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
+- [ ] [MEF](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
 
 _For more information, please refer to the [Datasets](https://github.com/canturan10/light_side/blob/master/light_side/datasets)_
 
@@ -159,13 +165,13 @@ To training, follow these steps:
 For installing Light Side, please refer to the [Installation](#installation).
 
 ```bash
-python training/zero_dce_training.py
+python training/zerodce_training.py
 ```
 
 For optional arguments,
 
 ```bash
-python training/zero_dce_training.py --help
+python training/zerodce_training.py --help
 ```
 
 <!-- TESTS -->
@@ -271,6 +277,14 @@ The references used in the development of the project are as follows.
 
 <!-- CITATIONS -->
 ## Citations
+
+```bibtex
+@misc{Turan_satellighte,
+author = {Turan, Oguzcan},
+title = {{satellighte}},
+url = {https://github.com/canturan10/satellighte}
+}
+```
 
 ```bibtex
 @article{DBLP:journals/corr/abs-2001-06826,
