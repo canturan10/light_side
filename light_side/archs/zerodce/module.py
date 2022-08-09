@@ -1,26 +1,85 @@
 import os
+from re import A
 from typing import Dict, List
 
 import torch
 import torch.nn as nn
 from .blocks.loss import *
+from .blocks.dce import DCE_Net
 
 
 class ZeroDCE(nn.Module):
     """
     Implementation of ZeroDCE: Zero-Reference Deep Curve Estimation for Low-Light Image Enhancement
-    The network is the one described in arxiv.org/abs/2001.06826v2 .
+    The network is the one described in arxiv.org/abs/2001.061626v2 .
     """
 
     # pylint: disable=no-member
 
     __CONFIGS__ = {
-        "default": {
+        "3-32-16": {
             "input": {
-                "input_size": 256,
+                "input_size": 224,
                 "normalized_input": True,
                 "mean": [0, 0, 0],
                 "std": [1, 1, 1],
+            },
+            "model": {
+                "layers": 3,
+                "maps": 32,
+                "iterations": 8,
+            },
+        },
+        "7-16-8": {
+            "input": {
+                "input_size": 224,
+                "normalized_input": True,
+                "mean": [0, 0, 0],
+                "std": [1, 1, 1],
+            },
+            "model": {
+                "layers": 7,
+                "maps": 16,
+                "iterations": 8,
+            },
+        },
+        "7-32-1": {
+            "input": {
+                "input_size": 224,
+                "normalized_input": True,
+                "mean": [0, 0, 0],
+                "std": [1, 1, 1],
+            },
+            "model": {
+                "layers": 7,
+                "maps": 32,
+                "iterations": 1,
+            },
+        },
+        "7-32-8": {
+            "input": {
+                "input_size": 224,
+                "normalized_input": True,
+                "mean": [0, 0, 0],
+                "std": [1, 1, 1],
+            },
+            "model": {
+                "layers": 7,
+                "maps": 32,
+                "iterations": 8,
+            },
+        },
+        "7-32-16": {
+            "input": {
+                "input_size": 224,
+                "normalized_input": True,
+                "mean": [0, 0, 0],
+                "std": [1, 1, 1],
+            },
+            "model": {
+                "layers": 7,
+                "maps": 32,
+                "iterations": 16,
             },
         },
     }
@@ -32,17 +91,15 @@ class ZeroDCE(nn.Module):
         super().__init__()
         self.config = config
 
-        self.relu = nn.ReLU(inplace=True)
+        self.layers = self.config["model"]["layers"]
+        self.maps = self.config["model"]["maps"]
+        self.iterations = self.config["model"]["iterations"]
 
-        self.conv1 = nn.Conv2d(3, 32, 3, 1, 1, bias=True)
-        self.conv2 = nn.Conv2d(32, 32, 3, 1, 1, bias=True)
-        self.conv3 = nn.Conv2d(32, 32, 3, 1, 1, bias=True)
-        self.conv4 = nn.Conv2d(32, 32, 3, 1, 1, bias=True)
-        self.conv5 = nn.Conv2d(32 * 2, 32, 3, 1, 1, bias=True)
-        self.conv6 = nn.Conv2d(32 * 2, 32, 3, 1, 1, bias=True)
-        self.conv7 = nn.Conv2d(32 * 2, 24, 3, 1, 1, bias=True)
-        self.maxpool = nn.MaxPool2d(2, stride=2, return_indices=False, ceil_mode=False)
-        self.upsample = nn.UpsamplingBilinear2d(scale_factor=2)
+        self.backbone = DCE_Net(
+            layers=self.layers,
+            maps=self.maps,
+            iterations=self.iterations,
+        )
 
         self.color_loss = ColorConstancyLoss()
         self.spatial_consistency_loss = SpatialConsistancyLoss()
@@ -50,32 +107,14 @@ class ZeroDCE(nn.Module):
         self.illumination_smoothing_loss = IlluminationSmoothnessLoss()
 
     def forward(self, x):
-        x1 = self.relu(self.conv1(x))
-        x2 = self.relu(self.conv2(x1))
-        x3 = self.relu(self.conv3(x2))
-        x4 = self.relu(self.conv4(x3))
-        x5 = self.relu(self.conv5(torch.cat([x3, x4], 1)))
-        x6 = self.relu(self.conv6(torch.cat([x2, x5], 1)))
-
-        x_r = F.tanh(self.conv7(torch.cat([x1, x6], 1)))
-        r1, r2, r3, r4, r5, r6, r7, r8 = torch.split(x_r, 3, dim=1)
-        x = x + r1 * (torch.pow(x, 2) - x)
-        x = x + r2 * (torch.pow(x, 2) - x)
-        x = x + r3 * (torch.pow(x, 2) - x)
-        enhance_image_1 = x + r4 * (torch.pow(x, 2) - x)
-        x = enhance_image_1 + r5 * (torch.pow(enhance_image_1, 2) - enhance_image_1)
-        x = x + r6 * (torch.pow(x, 2) - x)
-        x = x + r7 * (torch.pow(x, 2) - x)
-        enhance_image = x + r8 * (torch.pow(x, 2) - x)
-        r = torch.cat([r1, r2, r3, r4, r5, r6, r7, r8], 1)
-        return enhance_image_1, enhance_image, r
+        return self.backbone(x)
 
     def logits_to_preds(self, logits: List[torch.Tensor]):
         """
         Convert logits to predictions.
         """
-        enhance_image_1, _, _ = logits
-        return enhance_image_1
+        x, _ = logits
+        return x
 
     @classmethod
     def build(
@@ -94,7 +133,6 @@ class ZeroDCE(nn.Module):
             nn.Module: Model with random weights.
         """
         # return model with random weight initialization
-
         return cls(
             config=ZeroDCE.__CONFIGS__[config],
             **kwargs,
@@ -131,8 +169,7 @@ class ZeroDCE(nn.Module):
             **kwargs,
         )
 
-        # model.load_state_dict(s_dict["state_dict"], strict=True)
-        model.load_state_dict(s_dict, strict=False)
+        model.load_state_dict(s_dict["state_dict"], strict=True)
 
         return model
 
@@ -155,19 +192,17 @@ class ZeroDCE(nn.Module):
 
         Returns:  Loss
         """
-        _, enhanced_image, A = logits
-        loss_tv = 200 * self.illumination_smoothing_loss(A)
-        loss_spa = torch.mean(self.spatial_consistency_loss(enhanced_image, targets))
+        enhanced_image, le_curve = logits
+        loss_tv = 200 * self.illumination_smoothing_loss(le_curve)
+        loss_spa = 0.5 * torch.mean(
+            self.spatial_consistency_loss(enhanced_image, targets)
+        )
         loss_col = 5 * torch.mean(self.color_loss(enhanced_image))
         loss_exp = 10 * torch.mean(self.exposure_loss(enhanced_image))
         loss = loss_tv + loss_spa + loss_col + loss_exp
 
         return {
             "loss": loss,
-            "loss_tv": loss_tv,
-            "loss_spa": loss_spa,
-            "loss_col": loss_col,
-            "loss_exp": loss_exp,
         }
 
     def configure_optimizers(self, hparams: Dict):
@@ -196,7 +231,7 @@ class ZeroDCE(nn.Module):
                 self.parameters(),
                 lr=hparams.get("learning_rate", 1e-1),
                 # betas=hparams.get("betas", (0.9, 0.999)),
-                # eps=hparams.get("eps", 1e-08),
+                # eps=hparams.get("eps", 1e-016),
                 weight_decay=hparams.get("weight_decay", 1e-5),
             )
         elif hparams_optimizer == "adamw":
@@ -204,7 +239,7 @@ class ZeroDCE(nn.Module):
                 self.parameters(),
                 lr=hparams.get("learning_rate", 1e-1),
                 betas=hparams.get("betas", (0.9, 0.999)),
-                eps=hparams.get("eps", 1e-08),
+                eps=hparams.get("eps", 1e-016),
                 weight_decay=hparams.get("weight_decay", 1e-5),
             )
         else:
@@ -222,6 +257,10 @@ class ZeroDCE(nn.Module):
                 optimizer,
                 gamma=hparams.get("gamma", 0.5),
                 milestones=hparams.get("milestones", [500000, 1000000, 1500000]),
+            )
+        elif hparams_scheduler == "reduce":
+            scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+                optimizer, patience=10, mode="min", factor=0.97
             )
         else:
             raise ValueError("Unknown scheduler")

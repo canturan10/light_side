@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont
 def configure_batch(
     batch: List[torch.Tensor],
     target_size: int,
-    adaptive_batch: bool = False,
+    adaptive_batch: bool = True,
 ) -> torch.Tensor:
     """
     Configure batch for the required size
@@ -65,20 +65,23 @@ def configure_batch(
 
 
 def convert_np(
+    batch: List[torch.Tensor],
     preds: List[torch.Tensor],
 ) -> List[Dict]:
     """
     Convert the predictions to a numpy format
 
     Args:
+        batch (List[torch.Tensor]): List of torch.Tensor
         preds (List[torch.Tensor]): List of torch.Tensor
 
     Returns:
         List[Dict]: List of np arrays
     """
     outputs = []
-    for pred in preds:
-        outputs.append(
+    for img, pred in zip(batch, preds):
+        img = img.clamp_(0, 255).permute(1, 2, 0).to("cpu", torch.uint8).numpy()
+        pred = (
             pred.mul(255)
             .add_(0.5)
             .clamp_(0, 255)
@@ -87,22 +90,23 @@ def convert_np(
             .numpy()
         )
 
+        outputs.append({"image": img, "enhanced": pred})
+
     return outputs
 
 
-def visualize(img: np.ndarray, enhanced: np.ndarray) -> Image:
+def visualize(input: dict) -> Image:
     """
     Virtualize the image with the predictions
 
     Args:
-        img (np.ndarray): 3 channel np.ndarray
-        enhanced (np.ndarray): 3 channel enhanced np.ndarray
+        input (dict): Dictionary of the image and the predictions
 
     Returns:
         Image: 3 channel PIL Image that will be shown on screen
     """
-    orj_img = Image.fromarray(img)
-    enh_img = Image.fromarray(enhanced)
+    orj_img = Image.fromarray(input["image"])
+    enh_img = Image.fromarray(input["enhanced"])
 
     new_img = Image.new(
         "RGB", (orj_img.width + enh_img.width, min(orj_img.height, enh_img.height))

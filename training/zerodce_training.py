@@ -86,13 +86,6 @@ def parse_arguments():
 
     # Hyperparameters
     arg.add_argument(
-        "--criterion",
-        type=str,
-        default="cross_entropy",
-        choices=["cross_entropy"],
-        help="Criterion to use for training",
-    )
-    arg.add_argument(
         "--optimizer",
         type=str,
         default="adam",
@@ -180,6 +173,20 @@ def main(args):
     train_tt = tt.Compose(
         [
             tt.RandomCrop(input_size),
+            tt.RandomHorizontalFlip(
+                p=0.5,
+            ),
+            tt.RandomRotation(
+                degrees=2,
+            ),
+            tt.GaussianBlur(
+                kernel_size=(5, 9),
+                sigma=(0.1, 5),
+            ),
+            tt.RandomPerspective(
+                distortion_scale=0.1,
+                p=0.2,
+            ),
         ]
     )
     val_tt = tt.Compose(
@@ -222,13 +229,10 @@ def main(args):
         "milestones": [500000, 1000000, 1500000],
         "gamma": 0.1,
         "ratio": 10,
-        "criterion": args.criterion,
     }
 
     # Build the model with given architecture and configuration with randomly initialized weights.
-    model = ls.Enhancer.build(
-        args.arch, config=args.config, hparams=hparams, train=True
-    )
+    model = ls.Enhancer.build(args.arch, config=args.config, hparams=hparams)
 
     # If find_learning_rate is True, find the learning rate for the model
     if args.find_learning_rate:
@@ -257,22 +261,26 @@ def main(args):
         )
 
     # Saved model name
-    model_save_name = f"{args.arch}_{args.config}_best"
+    model_save_name = f"{args.arch}_{args.config}"
 
     # Define metrics
-    model.add_metric(
-        "PSNR",
-        tm.PeakSignalNoiseRatio(),
-    )
+    # model.add_metric(
+    #     "PSNR",
+    #     tm.PeakSignalNoiseRatio(),
+    # )
+    # model.add_metric(
+    #     "SSIM",
+    #     tm.StructuralSimilarityIndexMeasure(),
+    # )
+    # model.add_metric(
+    #     "MAE",
+    #     tm.MeanAbsoluteError(),
+    # )
 
     # Define checkpoint callback
     checkpoint_callback = pl.callbacks.ModelCheckpoint(
         dirpath=args.save_dir,  # Path to save the model
-        verbose=True,  # Whether to print information about the model checkpointing
         filename=model_save_name,  # Filename to save the model
-        monitor="loss/training",  # Quantity to monitor
-        save_top_k=1,  # Number of models to keep
-        mode="min",  # Save max metric value
     )
 
     # Define trainer
@@ -290,6 +298,7 @@ def main(args):
         overfit_batches=(
             0.01 if args.overfit else 0.0
         ),  # Overfit on a small number of batches
+        gradient_clip_val=0.1,
     )
 
     # Fit the model

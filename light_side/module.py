@@ -65,6 +65,7 @@ class Enhancer(pl.LightningModule):
         self,
         data: Union[np.ndarray, List],
         target_size: int = None,
+        adaptive_batch: bool = True,
     ):
         """
         Perform image classification using given image or images.
@@ -72,6 +73,7 @@ class Enhancer(pl.LightningModule):
         Args:
             data (Union[np.ndarray, List]): Numpy array or list of numpy arrays. In the form of RGB.
             target_size (int, optional): If it is not None, the image will be resized to the target size. Defaults to None.
+            adaptive_batch (bool, optional): If it is True, the batch size will be adjusted according to the number of images. Defaults to True.
 
         Returns:
             [type]: [description]
@@ -80,21 +82,24 @@ class Enhancer(pl.LightningModule):
         # Converts given image or list of images to list of tensors
         batch = self.to_tensor(data)
 
-        # Override target_size if input_size is given and target_size is None
-        if self.input_size and (target_size is None):
-            target_size = self.input_size
-        # target_size = None
-        # Configure batch for the required size
-        batch = configure_batch(
-            batch,
-            target_size=target_size,
-            adaptive_batch=target_size is None,
-        )
+        if adaptive_batch:
+            batch = configure_batch(batch, target_size=target_size)
+        else:
+            # Override target_size if input_size is given and target_size is None
+            if self.input_size and (target_size is None):
+                target_size = self.input_size
+            # target_size = None
+            # Configure batch for the required size
+            batch = configure_batch(
+                batch,
+                target_size=target_size,
+                adaptive_batch=target_size is None,
+            )
 
         # Get predictions from the model
         preds = self.forward(batch)
 
-        return convert_np(preds)
+        return convert_np(batch, preds)
 
     @classmethod
     def build(
