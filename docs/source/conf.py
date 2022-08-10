@@ -12,9 +12,9 @@
 #
 import os
 import sys
-import light_side as ls
 
 sys.path.insert(0, os.path.abspath("../.."))
+import light_side as ls
 
 
 # -- Project information -----------------------------------------------------
