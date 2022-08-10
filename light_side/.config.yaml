@@ -9,19 +9,23 @@ MODEL:
       zerodce:
         v0:
           url: ""
+        v1:
+          url: ""
     7-16-8:
       zerodce:
         v0:
           url: ""
-    7-32-1:
-      zerodce:
-        v0:
+        v1:
           url: ""
     7-32-8:
       zerodce:
         v0:
           url: ""
+        v1:
+          url: ""
     7-32-16:
       zerodce:
         v0:
+          url: ""
+        v1:
           url: ""

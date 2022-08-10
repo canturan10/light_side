@@ -11,7 +11,10 @@
 
 |  Architecture   | Configuration | Parameters | Model Size |
 | :-------------: | :-----------: | :--------: | :--------: |
-| **ZeroDCE** |    default    |   79.5 K    |  0.3 MB  |
+| **ZeroDCE** |    3-32-16    |   24.0 K    |  0.096 MB  |
+| **ZeroDCE** |    7-16-8    |   23.6 K    |  0.095 MB  |
+| **ZeroDCE** |    7-32-8    |   79.5 K    |  0.318 MB  |
+| **ZeroDCE** |    7-32-16    |   79.5 K    |  0.318 MB  |
 
 ## Citation
 

@@ -22,7 +22,9 @@ class ColorConstancyLoss(nn.Module):
         drg = torch.pow(mr - mg, 2)
         drb = torch.pow(mr - mb, 2)
         dgb = torch.pow(mb - mg, 2)
-        k = torch.pow(torch.pow(drg, 2) + torch.pow(drb, 2) + torch.pow(dgb, 2), 0.5)
+        k = torch.pow(
+            torch.pow(drg, 2) + torch.pow(drb, 2) + torch.pow(dgb, 2) + 1e-5, 0.5
+        )
         return k
 
 

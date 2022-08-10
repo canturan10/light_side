@@ -20,7 +20,7 @@ def parse_arguments():
     arg.add_argument(
         "--max_epoch",
         type=int,
-        default=130,
+        default=30,
         help="Maximum number of epochs to train the model",
     )
     arg.add_argument(

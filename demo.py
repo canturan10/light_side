@@ -66,7 +66,7 @@ def main(args):
     print(model.summarize(max_depth=1))
 
     if os.path.isdir(args.source):
-        for file in os.listdir(args.source):
+        for file in sorted(os.listdir(args.source)):
             print(file)
             file_path = os.path.join(args.source, file)
             if os.path.isfile(file_path):

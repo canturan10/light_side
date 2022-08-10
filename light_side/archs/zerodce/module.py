@@ -43,19 +43,6 @@ class ZeroDCE(nn.Module):
                 "iterations": 8,
             },
         },
-        "7-32-1": {
-            "input": {
-                "input_size": 224,
-                "normalized_input": True,
-                "mean": [0, 0, 0],
-                "std": [1, 1, 1],
-            },
-            "model": {
-                "layers": 7,
-                "maps": 32,
-                "iterations": 1,
-            },
-        },
         "7-32-8": {
             "input": {
                 "input_size": 224,
@@ -193,16 +180,20 @@ class ZeroDCE(nn.Module):
         Returns:  Loss
         """
         enhanced_image, le_curve = logits
-        loss_tv = 200 * self.illumination_smoothing_loss(le_curve)
-        loss_spa = 0.5 * torch.mean(
+        loss_tv = 150 * self.illumination_smoothing_loss(le_curve)
+        loss_spa = 5 * torch.mean(
             self.spatial_consistency_loss(enhanced_image, targets)
         )
-        loss_col = 5 * torch.mean(self.color_loss(enhanced_image))
-        loss_exp = 10 * torch.mean(self.exposure_loss(enhanced_image))
+        loss_col = 0.5 * torch.mean(self.color_loss(enhanced_image))
+        loss_exp = 3 * torch.mean(self.exposure_loss(enhanced_image))
         loss = loss_tv + loss_spa + loss_col + loss_exp
 
         return {
             "loss": loss,
+            "loss_tv": loss_tv,
+            "loss_spa": loss_spa,
+            "loss_col": loss_col,
+            "loss_exp": loss_exp,
         }
 
     def configure_optimizers(self, hparams: Dict):
