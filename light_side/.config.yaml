@@ -44,4 +44,4 @@ MODEL:
         v1:
           url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce.pth"
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce.onnx"
-          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce_quantize.onnx
+          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce_quantize.onnx"
