@@ -15,11 +15,6 @@ MODEL:
           url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_3-32-16_zerodce.pth"
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_3-32-16_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_3-32-16_zerodce_quantize.onnx"
-      private:
-        v0:
-          url: ""
-        v1:
-          url: ""
     7-16-8:
       zerodce:
         v0:
@@ -30,11 +25,6 @@ MODEL:
           url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-16-8_zerodce.pth"
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-16-8_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-16-8_zerodce_quantize.onnx"
-      private:
-        v0:
-          url: ""
-        v1:
-          url: ""
     7-32-8:
       zerodce:
         v0:
@@ -45,11 +35,6 @@ MODEL:
           url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-8_zerodce.pth"
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-8_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-8_zerodce_quantize.onnx"
-      private:
-        v0:
-          url: ""
-        v1:
-          url: ""
     7-32-16:
       zerodce:
         v0:
@@ -59,9 +44,4 @@ MODEL:
         v1:
           url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce.pth"
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce.onnx"
-          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce_quantize.onnx"
-      private:
-        v0:
-          url: ""
-        v1:
-          url: ""
+          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce_quantize.onnx
