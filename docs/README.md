@@ -82,7 +82,6 @@ Before you begin, ensure you have met the following requirements:
 | imageio           | ~=2.15.0 |
 | numpy             | ~=1.21.0 |
 | pytorch_lightning | ~=1.6.0  |
-| scikit-learn      | ~=1.0.2  |
 | torch             | ~=1.8.1  |
 
 <!-- INSTALLATION -->
@@ -150,7 +149,7 @@ _For more information, please refer to the [Datasets](https://github.com/cantura
 ## Deployments
 
 - [ ] [FastAPI](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
+- [x] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 - [ ] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 - [ ] [TensorFlow](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 - [ ] [TensorFlow Lite](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
