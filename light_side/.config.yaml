@@ -12,7 +12,9 @@ MODEL:
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_3-32-16_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_3-32-16_zerodce_quantize.onnx"
         v1:
-          url: ""
+          url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_3-32-16_zerodce.pth"
+          onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_3-32-16_zerodce.onnx"
+          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_3-32-16_zerodce_quantize.onnx"
       private:
         v0:
           url: ""
@@ -25,7 +27,9 @@ MODEL:
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_7-16-8_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_7-16-8_zerodce_quantize.onnx"
         v1:
-          url: ""
+          url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-16-8_zerodce.pth"
+          onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-16-8_zerodce.onnx"
+          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-16-8_zerodce_quantize.onnx"
       private:
         v0:
           url: ""
@@ -38,7 +42,9 @@ MODEL:
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_7-32-8_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_7-32-8_zerodce_quantize.onnx"
         v1:
-          url: ""
+          url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-8_zerodce.pth"
+          onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-8_zerodce.onnx"
+          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-8_zerodce_quantize.onnx"
       private:
         v0:
           url: ""
@@ -51,7 +57,9 @@ MODEL:
           onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_7-32-16_zerodce.onnx"
           quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.1/zerodce_7-32-16_zerodce_quantize.onnx"
         v1:
-          url: ""
+          url: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce.pth"
+          onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce.onnx"
+          quantize-onnx: "https://github.com/canturan10/light_side/releases/download/v0.0.2/zerodce_7-32-16_zerodce_quantize.onnx"
       private:
         v0:
           url: ""
