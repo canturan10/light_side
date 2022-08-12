@@ -1,4 +1,4 @@
-.. satellighte documentation master file, created by
+.. light_side documentation master file, created by
    sphinx-quickstart on Sat Feb 19 00:32:16 2022.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -41,3 +41,4 @@ Low-Light Image Enhancement
 
    deployment/onnx_export.rst
    deployment/onnx_runtime.rst
+   deployment/deepsparse.rst

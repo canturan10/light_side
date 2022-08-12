@@ -2,8 +2,8 @@
     <a href="https://www.buymeacoffee.com/canturan10"><img src="https://img.buymeacoffee.com/button-api/?text=You can buy me a coffee&emoji=&slug=canturan10&button_colour=5F7FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00" width="200" /></a>
 </p>
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-dicm)](https://paperswithcode.com/sota/low-light-image-enhancement-on-dicm?p=zero-reference-deep-curve-estimation-for-low)[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-lime)](https://paperswithcode.com/sota/low-light-image-enhancement-on-lime?p=zero-reference-deep-curve-estimation-for-low)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-mef)](https://paperswithcode.com/sota/low-light-image-enhancement-on-mef?p=zero-reference-deep-curve-estimation-for-low)[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-npe)](https://paperswithcode.com/sota/low-light-image-enhancement-on-npe?p=zero-reference-deep-curve-estimation-for-low)[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-vv)](https://paperswithcode.com/sota/low-light-image-enhancement-on-vv?p=zero-reference-deep-curve-estimation-for-low)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-dicm)](https://paperswithcode.com/sota/low-light-image-enhancement-on-dicm?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-lime)](https://paperswithcode.com/sota/low-light-image-enhancement-on-lime?p=zero-reference-deep-curve-estimation-for-low) 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-mef)](https://paperswithcode.com/sota/low-light-image-enhancement-on-mef?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-npe)](https://paperswithcode.com/sota/low-light-image-enhancement-on-npe?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-vv)](https://paperswithcode.com/sota/low-light-image-enhancement-on-vv?p=zero-reference-deep-curve-estimation-for-low)
 
 <!-- PROJECT SUMMARY -->
 <p align="center">
@@ -11,17 +11,22 @@
 <h2 align="center">Light Side of the Night</h2>
 <h4 align="center">Low-Light Image Enhancement</h4>
 
-<!--
 <p align="center">
     <strong>
         <a href="https://canturan10.github.io/light_side/">Website</a>
         •
-        <a href="https://light_side.readthedocs.io/">Docs</a>
+        <a href="https://light-side.readthedocs.io/">Docs</a>
         •
-        <a href="https://share.streamlit.io/canturan10/light_side-streamlit/app.py">Demo</a>
+        <a href="https://pypi.org/project/light-side/">Pypi</a>
     </strong>
 </p>
--->
+<p align="center">
+    <strong>
+        <a href="#">Demo Page</a>
+        •
+        <a href="#">Hugging Face</a>
+    </strong>
+</p>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -150,7 +155,7 @@ _For more information, please refer to the [Datasets](https://github.com/cantura
 
 - [ ] [FastAPI](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 - [x] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
+- [x] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 - [ ] [TensorFlow](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 - [ ] [TensorFlow Lite](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
 
@@ -277,6 +282,9 @@ The references used in the development of the project are as follows.
 <!-- CITATIONS -->
 ## Citations
 
+<details>
+  <summary>Click to expand!</summary>
+
 ```bibtex
 @misc{Turan_satellighte,
 author = {Turan, Oguzcan},
@@ -307,7 +315,10 @@ url = {https://github.com/canturan10/satellighte}
 }
 ```
 
-Give a ⭐️ if this project helped you!
+</details>
+
 ![-----------------------------------------------------](https://raw.githubusercontent.com/canturan10/readme-template/master/src/colored_4b.png)
+
+Give a ⭐️ if this project helped you!
 
 _This readme file is made using the [readme-template](https://github.com/canturan10/readme-template)_

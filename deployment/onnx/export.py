@@ -1,12 +1,9 @@
+import argparse
 import os
 import tempfile
-import torch
-import argparse
-import onnx
-
-import torch
 
 import light_side as ls
+import torch
 
 
 def parse_arguments():
