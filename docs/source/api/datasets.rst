@@ -7,7 +7,7 @@ light_side.datasets
    :undoc-members:
    :inherited-members:
 
-.. autoclass:: satellighte.datasets.ZeroDCE
+.. autoclass:: light_side.datasets.ZeroDCE
    :members:
    :private-members:
    :undoc-members:
