@@ -1,7 +1,7 @@
 import time
 import os
 
-from light_side.version import __version__ as pkg_version
+_PATH_ROOT = os.path.dirname(__file__)
 
 _this_year = time.strftime("%Y")
 __author__ = "Oguzcan Turan"
@@ -14,7 +14,25 @@ __homepage__ = "https://github.com/canturan10/light_side"
 __license__ = "MIT License"
 __license_url__ = __homepage__ + "/blob/master/LICENSE"
 __pkg_name__ = "light_side"
-__version__ = pkg_version
+
+
+def _load_version(file_name: str = "version.py") -> str:
+    """
+    Load version from a py file.
+
+    Args:
+        file_name (str, optional): File name. Defaults to "version.py".
+
+    Returns:
+        str: Version.
+    """
+    # Open the file
+    with open(os.path.join(_PATH_ROOT, file_name), "r", encoding="utf-8") as file:
+        version = file.read().split("=")[-1].replace("'", "").replace('"', "").strip()
+    return version
+
+
+__version__ = _load_version()
 
 __all__ = [
     "__author__",
@@ -24,7 +42,6 @@ __all__ = [
     "__homepage__",
     "__license__",
     "__license_url__",
-    "__long_description__",
     "__pkg_name__",
     "__version__",
 ]
