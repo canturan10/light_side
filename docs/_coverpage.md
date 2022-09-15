@@ -7,6 +7,6 @@
 
 > Low-Light Image Enhancement
 
-[Documentation](#)
-[Demo](#)
+[Documentation](https://light-side.readthedocs.io/en/latest/)
+[Demo](https://huggingface.co/spaces/canturan10/light_side/)
 [Get Started](#about-the-light-side)

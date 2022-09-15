@@ -2,7 +2,7 @@
     <a href="https://www.buymeacoffee.com/canturan10"><img src="https://img.buymeacoffee.com/button-api/?text=You can buy me a coffee&emoji=&slug=canturan10&button_colour=5F7FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00" width="200" /></a>
 </p>
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-dicm)](https://paperswithcode.com/sota/low-light-image-enhancement-on-dicm?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-lime)](https://paperswithcode.com/sota/low-light-image-enhancement-on-lime?p=zero-reference-deep-curve-estimation-for-low) 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-dicm)](https://paperswithcode.com/sota/low-light-image-enhancement-on-dicm?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-lime)](https://paperswithcode.com/sota/low-light-image-enhancement-on-lime?p=zero-reference-deep-curve-estimation-for-low)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-mef)](https://paperswithcode.com/sota/low-light-image-enhancement-on-mef?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-npe)](https://paperswithcode.com/sota/low-light-image-enhancement-on-npe?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-vv)](https://paperswithcode.com/sota/low-light-image-enhancement-on-vv?p=zero-reference-deep-curve-estimation-for-low)
 
 <!-- PROJECT SUMMARY -->
@@ -22,11 +22,11 @@
 </p>
 <p align="center">
     <strong>
-        <a href="#">Demo Page</a>
-        •
-        <a href="#">Hugging Face</a>
+        <a href="https://huggingface.co/spaces/canturan10/light_side"><img src="https://img.shields.io/badge/🤗-Open%20In%20Spaces-blue" /></a>
     </strong>
 </p>
+<p align="center">
+    <img width="30%" src="https://raw.githubusercontent.com/canturan10/light_side/master/src/sample/0.gif" align="center" alt="Light Side" />
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -85,8 +85,9 @@ Before you begin, ensure you have met the following requirements:
 | requirement       | version  |
 | ----------------- | -------- |
 | imageio           | ~=2.15.0 |
-| numpy             | ~=1.21.0 |
+| numpy             | ~=1.22.0 |
 | pytorch_lightning | ~=1.6.0  |
+| scikit-learn      | ~=1.0.2  |
 | torch             | ~=1.8.1  |
 
 <!-- INSTALLATION -->
@@ -133,7 +134,7 @@ results = model.predict(img)
 <!-- ARCHITECTURES -->
 ## Architectures
 
-- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
+- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md#zerodce)
 - [ ] [EnlightenGAN](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
 - [ ] [MBLLEN](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
 - [ ] [LLFlow](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
@@ -143,7 +144,7 @@ _For more information, please refer to the [Architectures](https://github.com/ca
 <!-- DATASETS -->
 ## Datasets
 
-- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
+- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md#zerodce)
 - [ ] [LOL](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
 - [ ] [DICM](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
 - [ ] [MEF](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
@@ -153,11 +154,11 @@ _For more information, please refer to the [Datasets](https://github.com/cantura
 <!-- DEPLOYMENTS -->
 ## Deployments
 
-- [ ] [FastAPI](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [x] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [TensorFlow](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [TensorFlow Lite](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
+- [x] [FastAPI](https://github.com/canturan10/light_side/blob/master/deployment/README.md#fastapi)
+- [x] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md#onnx)
+- [x] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md#deepsparse)
+- [x] [TensorFlow](https://github.com/canturan10/light_side/blob/master/deployment/README.md#tensorflow)
+- [x] [TensorFlow Lite](https://github.com/canturan10/light_side/blob/master/deployment/README.md#tensorflow-runtime)
 
 _For more information, please refer to the [Deployment](https://github.com/canturan10/light_side/blob/master/deployment)_
 

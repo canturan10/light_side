@@ -2,7 +2,7 @@
     <a href="https://www.buymeacoffee.com/canturan10"><img src="https://img.buymeacoffee.com/button-api/?text=You can buy me a coffee&emoji=&slug=canturan10&button_colour=5F7FFF&font_colour=ffffff&font_family=Comic&outline_colour=000000&coffee_colour=FFDD00" width="200" /></a>
 </p>
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-dicm)](https://paperswithcode.com/sota/low-light-image-enhancement-on-dicm?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-lime)](https://paperswithcode.com/sota/low-light-image-enhancement-on-lime?p=zero-reference-deep-curve-estimation-for-low) 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-dicm)](https://paperswithcode.com/sota/low-light-image-enhancement-on-dicm?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-lime)](https://paperswithcode.com/sota/low-light-image-enhancement-on-lime?p=zero-reference-deep-curve-estimation-for-low)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-mef)](https://paperswithcode.com/sota/low-light-image-enhancement-on-mef?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-npe)](https://paperswithcode.com/sota/low-light-image-enhancement-on-npe?p=zero-reference-deep-curve-estimation-for-low) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/zero-reference-deep-curve-estimation-for-low/low-light-image-enhancement-on-vv)](https://paperswithcode.com/sota/low-light-image-enhancement-on-vv?p=zero-reference-deep-curve-estimation-for-low)
 
 <!-- PROJECT SUMMARY -->
@@ -22,11 +22,11 @@
 </p>
 <p align="center">
     <strong>
-        <a href="#">Demo Page</a>
-        •
-        <a href="#">Hugging Face</a>
+        <a href="https://huggingface.co/spaces/canturan10/light_side"><img src="https://img.shields.io/badge/🤗-Open%20In%20Spaces-blue" /></a>
     </strong>
 </p>
+<p align="center">
+    <img width="30%" src="https://raw.githubusercontent.com/canturan10/light_side/master/src/sample/0.gif" align="center" alt="Light Side" />
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -85,8 +85,9 @@ Before you begin, ensure you have met the following requirements:
 | requirement       | version  |
 | ----------------- | -------- |
 | imageio           | ~=2.15.0 |
-| numpy             | ~=1.21.0 |
+| numpy             | ~=1.22.0 |
 | pytorch_lightning | ~=1.6.0  |
+| scikit-learn      | ~=1.0.2  |
 | torch             | ~=1.8.1  |
 
 <!-- INSTALLATION -->
@@ -130,10 +131,77 @@ model.eval()
 results = model.predict(img)
 ```
 
+<!-- APIs -->
+# APIs
+
+## 1- Get Available Models
+
+```python
+import light_side as ls
+ls.available_models()
+# ['zerodce_3-32-16_zerodce', 'zerodce_7-16-8_zerodce', 'zerodce_7-32-16_zerodce', 'zerodce_7-32-8_zerodce']
+```
+
+## 2- Get Available Versions for a Spesific Model
+
+```python
+import light_side as ls
+model_name = 'zerodce_3-32-16_zerodce'
+ls.get_model_versions(model_name)
+# ['0', '1']
+```
+
+## 3- Get Latest Version for a Spesific Model
+
+```python
+import light_side as ls
+model_name = 'zerodce_3-32-16_zerodce'
+ls.get_model_latest_version(model_name)
+# '0'
+```
+
+## 4- Get Pretrained Model
+
+```python
+import light_side as ls
+model_name = 'zerodce_3-32-16_zerodce'
+model = ls.Enhancer.from_pretrained(model_name, version=None) # if version none is given than latest version will be used.
+# model: pl.LightningModule
+```
+
+## 5- Get Model with Random Weight Initialization
+
+```python
+import light_side as ls
+arch = 'zerodce'
+config = '3-32-16'
+model = ls.Enhancer.build(arch, config)
+# model: pl.LightningModule
+```
+
+## 6- Get Pretrained Arch Model
+
+```python
+import light_side as ls
+model_name = 'zerodce_3-32-16_zerodce'
+model = ls.Enhancer.from_pretrained_arch(model_name, version=None) # if version none is given than latest version will be used.
+# model: torch.nn.Module
+```
+
+## 7- Get Arch Model with Random Weight Initialization
+
+```python
+import light_side as ls
+arch = 'zerodce'
+config = '3-32-16'
+model = ls.Enhancer.build_arch(arch, config)
+# model: torch.nn.Module
+```
+
 <!-- ARCHITECTURES -->
 ## Architectures
 
-- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
+- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md#zerodce)
 - [ ] [EnlightenGAN](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
 - [ ] [MBLLEN](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
 - [ ] [LLFlow](https://github.com/canturan10/light_side/blob/master/light_side/archs/README.md)
@@ -143,7 +211,7 @@ _For more information, please refer to the [Architectures](https://github.com/ca
 <!-- DATASETS -->
 ## Datasets
 
-- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
+- [x] [Zero DCE](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md#zerodce)
 - [ ] [LOL](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
 - [ ] [DICM](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
 - [ ] [MEF](https://github.com/canturan10/light_side/blob/master/light_side/datasets/README.md)
@@ -153,11 +221,11 @@ _For more information, please refer to the [Datasets](https://github.com/cantura
 <!-- DEPLOYMENTS -->
 ## Deployments
 
-- [ ] [FastAPI](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [x] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [x] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [TensorFlow](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
-- [ ] [TensorFlow Lite](https://github.com/canturan10/light_side/blob/master/deployment/README.md)
+- [x] [FastAPI](https://github.com/canturan10/light_side/blob/master/deployment/README.md#fastapi)
+- [x] [ONNX](https://github.com/canturan10/light_side/blob/master/deployment/README.md#onnx)
+- [x] [DeepSparse](https://github.com/canturan10/light_side/blob/master/deployment/README.md#deepsparse)
+- [x] [TensorFlow](https://github.com/canturan10/light_side/blob/master/deployment/README.md#tensorflow)
+- [x] [TensorFlow Lite](https://github.com/canturan10/light_side/blob/master/deployment/README.md#tensorflow-runtime)
 
 _For more information, please refer to the [Deployment](https://github.com/canturan10/light_side/blob/master/deployment)_
 
