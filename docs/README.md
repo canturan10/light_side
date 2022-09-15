@@ -131,6 +131,19 @@ model.eval()
 results = model.predict(img)
 ```
 
+<!-- APIs -->
+## APIs
+
+- [Available Models](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#available-models)
+- [Available Versions for a Spesific Model](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#available-versions-for-a-spesific-model)
+- [Latest Version for a Spesific Model](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#latest-version-for-a-spesific-model)
+- [Pretrained Model](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#pretrained-model)
+- [Model with Random Weight Initialization](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#model-with-random-weight-initialization)
+- [Pretrained Arch Model](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#pretrained-arch-model)
+- [Arch Model with Random Weight Initialization](https://github.com/canturan10/light_side/blob/master/light_side/api/README.md#arch-model-with-random-weight-initialization)
+
+_For more information, please refer to the [APIs](https://github.com/canturan10/light_side/blob/master/light_side/api)_
+
 <!-- ARCHITECTURES -->
 ## Architectures
 
