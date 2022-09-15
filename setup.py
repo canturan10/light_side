@@ -114,7 +114,7 @@ setuptools.setup(
     include_package_data=True,
     long_description=_load_readme(),
     long_description_content_type="text/markdown",
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     extras_require=extras_require,
     setup_requires=[],
     install_requires=__requirements__,
