@@ -49,7 +49,7 @@ python deployment/fastapi/service.py
 From root directory of the repository run followings,
 
 ```bash
-docker build -t satellighte-fastapi deployment/fastapi/
+docker build -t light-side-fastapi deployment/fastapi/
 ```
 
 ### Run AI Service As Docker Container
@@ -57,13 +57,13 @@ docker build -t satellighte-fastapi deployment/fastapi/
 if gpu enabled, run with
 
 ```bash
-docker run -d --name satellighte-service --rm -p 8080:8080 --gpus all satellighte-fastapi
+docker run -d --name light-side-service --rm -p 8080:8080 --gpus all light-side-fastapi
 ```
 
 if gpu disabled, run with
 
 ```bash
-docker run -d --name satellighte-service --rm -p 8080:8080 satellighte-fastapi
+docker run -d --name light-side-service --rm -p 8080:8080 light-side-fastapi
 ```
 
 ## ONNX
