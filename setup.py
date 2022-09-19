@@ -56,6 +56,21 @@ def _load_readme(file_name: str = "README.md") -> str:
     return readme
 
 
+def _load_version(file_name: str = "light_side/version.py") -> str:
+    """
+    Load readme from a text file.
+
+    Args:
+        file_name (str, optional): File name that contains the verison. Defaults to ""light_side/version.py"".
+
+    Returns:
+        str: Version.
+    """
+    with open(os.path.join(_PATH_ROOT, file_name), "r", encoding="utf-8") as file:
+        version = file.read().split("=")[-1].replace("'", "").replace('"', "").strip()
+    return version
+
+
 def _load_py_module(fname, pkg="light_side"):
     spec = spec_from_file_location(
         os.path.join(pkg, fname), os.path.join(_PATH_ROOT, pkg, fname)
@@ -104,7 +119,7 @@ extras_require = {
 }
 setuptools.setup(
     name=about.__pkg_name__,
-    version=about.__version__,
+    version=_load_version(),
     description=about.__description__,
     author=about.__author__,
     author_email=about.__author_email__,
